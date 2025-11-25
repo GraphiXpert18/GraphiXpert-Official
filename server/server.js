@@ -58,12 +58,14 @@ const authRoutes = require('./routes/auth');
 const serviceRoutes = require('./routes/services');
 const portfolioRoutes = require('./routes/portfolio');
 const enquiryRoutes = require('./routes/enquiries');
+const seedRoutes = require('./routes/seed');
 
 // Use Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/portfolio', portfolioRoutes);
 app.use('/api/enquiries', enquiryRoutes);
+app.use('/api/seed', seedRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
