@@ -1,17 +1,46 @@
 const multer = require('multer');
 const path = require('path');
 
-const storage = multer.diskStorage({
-    destination(req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename(req, file, cb) {
-        cb(
-            null,
-            `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-        );
-    },
-});
+// Check if Cloudinary credentials are available
+const useCloudinary = process.env.CLOUDINARY_CLOUD_NAME &&
+    process.env.CLOUDINARY_API_KEY &&
+    process.env.CLOUDINARY_API_SECRET;
+
+let storage;
+
+if (useCloudinary) {
+    // Use Cloudinary for production (Render deployment)
+    const cloudinary = require('cloudinary').v2;
+    const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET
+    });
+
+    storage = new CloudinaryStorage({
+        cloudinary: cloudinary,
+        params: {
+            folder: 'graphixpert',
+            allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'webm', 'mov', 'avi'],
+            resource_type: 'auto'
+        }
+    });
+} else {
+    // Use local storage for development
+    storage = multer.diskStorage({
+        destination(req, file, cb) {
+            cb(null, 'uploads/');
+        },
+        filename(req, file, cb) {
+            cb(
+                null,
+                `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+            );
+        },
+    });
+}
 
 function checkFileType(file, cb) {
     // Support images and videos

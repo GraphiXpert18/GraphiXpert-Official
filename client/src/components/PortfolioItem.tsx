@@ -12,12 +12,25 @@ interface PortfolioProps {
 }
 
 const PortfolioItem = ({ item }: { item: PortfolioProps }) => {
+    // Helper function to get full image URL (supports both Cloudinary and local paths)
+    const getImageUrl = (imagePath: string | undefined) => {
+        if (!imagePath) return '/placeholder.jpg';
+        // If it's already a full URL (Cloudinary), return as-is
+        if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+            return imagePath;
+        }
+        // Otherwise, it's a local path, prepend the server URL
+        return `http://localhost:5000${imagePath}`;
+    };
+
     // Use thumbnail if available, otherwise fall back to first image
     const displayImage = item.thumbnail
-        ? `http://localhost:5000${item.thumbnail}`
+        ? getImageUrl(item.thumbnail)
         : item.images && item.images.length > 0
-            ? `http://localhost:5000${item.images[0]}`
-            : item.image || '/placeholder.jpg';
+            ? getImageUrl(item.images[0])
+            : item.image
+                ? getImageUrl(item.image)
+                : '/placeholder.jpg';
 
     return (
         <Link href={`/portfolio/${item._id}`}>
