@@ -1,0 +1,53 @@
+// @desc    Update a portfolio item
+// @route   PUT /api/portfolio/:id
+// @access  Private/Admin
+router.put('/:id', protect, admin, upload.fields([
+    { name: 'thumbnail', maxCount: 1 },
+    { name: 'images', maxCount: 10 },
+    { name: 'videos', maxCount: 5 }
+]), async (req, res) => {
+    const { title, category, description, videoUrl, caseStudy, featured } = req.body;
+    
+    try {
+        const portfolio = await Portfolio.findById(req.params.id);
+
+        if (portfolio) {
+            portfolio.title = title || portfolio.title;
+            portfolio.category = category || portfolio.category;
+            portfolio.description = description || portfolio.description;
+            portfolio.videoUrl = videoUrl || portfolio.videoUrl;
+            portfolio.caseStudy = caseStudy || portfolio.caseStudy;
+            portfolio.featured = featured !== undefined ? featured === 'true' : portfolio.featured;
+
+            // Update thumbnail if provided
+            if (req.files?.thumbnail) {
+                portfolio.thumbnail = `/uploads/${req.files.thumbnail[0].filename}`;
+            }
+
+            // Add new images if provided
+            if (req.files?.images) {
+                const newImages = req.files.images.map(file => `/uploads/${file.filename}`);
+                portfolio.images = [...portfolio.images, ...newImages];
+            }
+
+            // Add new videos if provided
+            if (req.files?.videos) {
+                const newVideos = req.files.videos.map(file => `/uploads/${file.filename}`);
+                portfolio.videos = [...(portfolio.videos || []), ...newVideos];
+            }
+
+            // Auto-select first image as thumbnail if no thumbnail exists
+            if (!portfolio.thumbnail && portfolio.images.length > 0) {
+                portfolio.thumbnail = portfolio.images[0];
+            }
+
+            const updatedPortfolio = await portfolio.save();
+            res.json(updatedPortfolio);
+        } else {
+            res.status(404).json({ message: 'Portfolio item not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
