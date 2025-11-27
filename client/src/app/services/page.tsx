@@ -43,8 +43,8 @@ const mockServices = [
     },
     {
         _id: '6',
-        title: 'Video Editing',
-        description: 'Professional video editing services for corporate videos, social media, and more.',
+        title: 'Multimedia Service',
+        description: 'Professional multimedia services including video editing, animation, and more.',
         priceRange: '$200 - $3000',
         image: 'https://images.unsplash.com/photo-1574717436423-a75a68c65b44?auto=format&fit=crop&w=800&q=80',
     },
@@ -55,22 +55,29 @@ export default function ServicesPage() {
     const [loading, setLoading] = useState(false); // Set to true if actually fetching
 
     useEffect(() => {
-        // Uncomment to fetch from API
-        /*
         const fetchServices = async () => {
-          try {
-            setLoading(true);
-            const { data } = await api.get('/services');
-            setServices(data);
-          } catch (error) {
-            console.error('Failed to fetch services:', error);
-            // Fallback to mock data is already set
-          } finally {
-            setLoading(false);
-          }
+            try {
+                setLoading(true);
+                const { data } = await api.get('/services');
+
+                // Process image URLs
+                const processedServices = data.map((service: any) => ({
+                    ...service,
+                    image: service.image ? `http://localhost:5000${service.image}` : undefined
+                }));
+
+                if (processedServices.length > 0) {
+                    setServices(processedServices);
+                }
+            } catch (error) {
+                console.error('Failed to fetch services:', error);
+                // Fallback to mock data is already set
+            } finally {
+                setLoading(false);
+            }
         };
+
         fetchServices();
-        */
     }, []);
 
     if (loading) {

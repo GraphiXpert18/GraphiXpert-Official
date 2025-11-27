@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Portfolio = require('./models/Portfolio');
+const Project = require('./models/Project');
 
 dotenv.config();
 
@@ -9,40 +9,40 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.error('MongoDB Connection Error:', err));
 
-const portfolioData = {
+const ProjectData = {
     title: 'Graphic Design',
     description: 'Proud to share my latest freelance project for a beauty parlour! I designed a Banner, Business card, and poster, logo to give their brand a fresh and professional look.',
     category: 'Graphic Design',
     images: [
-        '/uploads/portfolio/haniya-beauty-1.jpg',
-        '/uploads/portfolio/haniya-beauty-2.jpg',
-        '/uploads/portfolio/haniya-beauty-3.jpg',
-        '/uploads/portfolio/haniya-beauty-4.jpg',
-        '/uploads/portfolio/haniya-beauty-5.jpg'
+        '/uploads/Project/haniya-beauty-1.jpg',
+        '/uploads/Project/haniya-beauty-2.jpg',
+        '/uploads/Project/haniya-beauty-3.jpg',
+        '/uploads/Project/haniya-beauty-4.jpg',
+        '/uploads/Project/haniya-beauty-5.jpg'
     ],
     featured: true
 };
 
-async function seedPortfolio() {
+async function seedProject() {
     try {
         // Check if project already exists
-        const existing = await Portfolio.findOne({ title: 'Graphic Design' });
+        const existing = await Project.findOne({ title: 'Graphic Design' });
 
         if (existing) {
-            console.log('Portfolio project already exists. Updating...');
-            await Portfolio.findByIdAndUpdate(existing._id, portfolioData);
-            console.log('Portfolio project updated successfully!');
+            console.log('Project project already exists. Updating...');
+            await Project.findByIdAndUpdate(existing._id, ProjectData);
+            console.log('Project project updated successfully!');
         } else {
-            const portfolio = new Portfolio(portfolioData);
-            await portfolio.save();
-            console.log('Portfolio project added successfully!');
+            const Project = new Project(ProjectData);
+            await Project.save();
+            console.log('Project project added successfully!');
         }
 
         process.exit(0);
     } catch (error) {
-        console.error('Error adding portfolio:', error);
+        console.error('Error adding Project:', error);
         process.exit(1);
     }
 }
 
-seedPortfolio();
+seedProject();

@@ -67,6 +67,12 @@ app.use('/api/portfolio', portfolioRoutes);
 app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/seed', seedRoutes);
 
+// 404 Handler
+app.use((req, res, next) => {
+    console.log(`404 Not Found: ${req.method} ${req.originalUrl}`);
+    res.status(404).send('Not Found');
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

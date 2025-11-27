@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -32,8 +33,15 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
                     <div className="flex items-center">
-                        <Link href="/" className="text-2xl font-bold text-blue-600">
-                            GraphiXpert
+                        <Link href="/" className="flex items-center gap-2">
+                            <Image
+                                src="/logo-icon.png"
+                                alt="GraphiXpert Logo"
+                                width={40}
+                                height={40}
+                                className="h-10 w-auto"
+                            />
+                            <span className="text-2xl font-bold text-blue-600">GraphiXpert</span>
                         </Link>
                     </div>
                     <div className="hidden md:flex items-center space-x-8">

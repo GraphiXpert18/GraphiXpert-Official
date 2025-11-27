@@ -16,7 +16,7 @@ const AdminSidebar = () => {
     const links = [
         { name: 'Dashboard', path: '/admin', icon: <FaTachometerAlt /> },
         { name: 'Services', path: '/admin/services', icon: <FaServicestack /> },
-        { name: 'Portfolio', path: '/admin/portfolio', icon: <FaImages /> },
+        { name: 'Projects', path: '/admin/portfolio', icon: <FaImages /> },
         { name: 'Enquiries', path: '/admin/enquiries', icon: <FaEnvelope /> },
     ];
 
@@ -32,8 +32,8 @@ const AdminSidebar = () => {
                             <Link
                                 href={link.path}
                                 className={`flex items-center space-x-3 px-4 py-3 rounded-md transition duration-300 ${pathname === link.path
-                                        ? 'bg-blue-600 text-white'
-                                        : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                                    ? 'bg-blue-600 text-white'
+                                    : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                                     }`}
                             >
                                 <span className="text-xl">{link.icon}</span>

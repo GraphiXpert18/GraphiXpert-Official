@@ -4,19 +4,20 @@ import { useState } from 'react';
 import { FaTimes, FaUpload, FaImage, FaVideo, FaFileImage } from 'react-icons/fa';
 import api from '@/lib/api';
 
-interface PortfolioUploadModalProps {
+interface ProjectUploadModalProps {
     isOpen: boolean;
     onClose: () => void;
     onSuccess: () => void;
     editItem?: any;
 }
 
-export default function PortfolioUploadModal({ isOpen, onClose, onSuccess, editItem }: PortfolioUploadModalProps) {
+export default function ProjectUploadModal({ isOpen, onClose, onSuccess, editItem }: ProjectUploadModalProps) {
     const [formData, setFormData] = useState({
         title: editItem?.title || '',
         category: editItem?.category || 'Web Design',
         description: editItem?.description || '',
         videoUrl: editItem?.videoUrl || '',
+        link: editItem?.link || '',
         featured: editItem?.featured || false,
     });
 
@@ -29,7 +30,7 @@ export default function PortfolioUploadModal({ isOpen, onClose, onSuccess, editI
     const [uploading, setUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
 
-    const categories = ['Web Design', 'App Development', 'UI/UX Design', 'Graphic Design', 'Video Editing', 'Digital Marketing'];
+    const categories = ['Web Design', 'App Development', 'UI/UX Design', 'Graphic Design', 'Multimedia Service', 'Digital Marketing'];
 
     if (!isOpen) return null;
 
@@ -100,6 +101,7 @@ export default function PortfolioUploadModal({ isOpen, onClose, onSuccess, editI
             data.append('category', formData.category);
             data.append('description', formData.description);
             data.append('videoUrl', formData.videoUrl);
+            data.append('link', formData.link);
             data.append('featured', formData.featured.toString());
 
             if (thumbnail) {
@@ -134,8 +136,8 @@ export default function PortfolioUploadModal({ isOpen, onClose, onSuccess, editI
             onClose();
             resetForm();
         } catch (error) {
-            console.error('Error uploading portfolio:', error);
-            alert('Failed to upload portfolio. Please try again.');
+            console.error('Error uploading Project:', error);
+            alert('Failed to upload Project. Please try again.');
         } finally {
             setUploading(false);
             setUploadProgress(0);
@@ -148,6 +150,7 @@ export default function PortfolioUploadModal({ isOpen, onClose, onSuccess, editI
             category: 'Web Design',
             description: '',
             videoUrl: '',
+            link: '',
             featured: false,
         });
         setThumbnail(null);
@@ -164,7 +167,7 @@ export default function PortfolioUploadModal({ isOpen, onClose, onSuccess, editI
                 {/* Header */}
                 <div className="flex justify-between items-center p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
                     <h2 className="text-2xl font-bold text-gray-800">
-                        {editItem ? 'Edit Portfolio Item' : 'Add New Portfolio Item'}
+                        {editItem ? 'Edit Project Item' : 'Add New Project Item'}
                     </h2>
                     <button
                         onClick={onClose}
@@ -346,6 +349,22 @@ export default function PortfolioUploadModal({ isOpen, onClose, onSuccess, editI
                             onChange={handleInputChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="https://youtube.com/..."
+                        />
+                    </div>
+
+                    {/* Live Project Link */}
+                    <div>
+                        <label htmlFor="link" className="block text-gray-700 font-medium mb-2">
+                            Live Project Link (Optional)
+                        </label>
+                        <input
+                            type="url"
+                            id="link"
+                            name="link"
+                            value={formData.link}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="https://example.com"
                         />
                     </div>
 

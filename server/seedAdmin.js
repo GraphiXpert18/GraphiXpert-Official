@@ -11,18 +11,24 @@ mongoose.connect(process.env.MONGO_URI)
 
 const adminUser = {
     username: 'Admin',
-    email: 'rajaaysha78@gmail.com',
-    password: 'admin',
+    email: 'graphixpert18@gmail.com',
+    password: 'graphi@18xpert',
     role: 'admin'
 };
 
 async function seedAdmin() {
     try {
-        // Check if admin already exists
-        const existing = await User.findOne({ email: adminUser.email });
+        // Check if admin already exists by username or email
+        const existing = await User.findOne({
+            $or: [{ email: adminUser.email }, { username: adminUser.username }]
+        });
 
         if (existing) {
-            console.log('Admin user already exists.');
+            console.log('Admin user already exists. Updating credentials...');
+            existing.email = adminUser.email;
+            existing.password = adminUser.password;
+            await existing.save();
+            console.log('Admin credentials updated successfully!');
         } else {
             const user = new User(adminUser);
             await user.save();

@@ -41,7 +41,7 @@ router.post('/', protect, admin, upload.fields([
     { name: 'images', maxCount: 10 },
     { name: 'videos', maxCount: 5 }
 ]), async (req, res) => {
-    const { title, category, description, videoUrl, caseStudy, featured } = req.body;
+    const { title, category, description, videoUrl, link, caseStudy, featured } = req.body;
 
     const thumbnail = req.files?.thumbnail ? `/uploads/${req.files.thumbnail[0].filename}` : null;
     const images = req.files?.images ? req.files.images.map(file => `/uploads/${file.filename}`) : [];
@@ -56,6 +56,7 @@ router.post('/', protect, admin, upload.fields([
             images,
             videos,
             videoUrl,
+            link,
             caseStudy,
             featured: featured === 'true',
         });
@@ -75,7 +76,7 @@ router.put('/:id', protect, admin, upload.fields([
     { name: 'images', maxCount: 10 },
     { name: 'videos', maxCount: 5 }
 ]), async (req, res) => {
-    const { title, category, description, videoUrl, caseStudy, featured } = req.body;
+    const { title, category, description, videoUrl, link, caseStudy, featured } = req.body;
 
     try {
         const portfolio = await Portfolio.findById(req.params.id);
@@ -85,6 +86,7 @@ router.put('/:id', protect, admin, upload.fields([
             portfolio.category = category || portfolio.category;
             portfolio.description = description || portfolio.description;
             portfolio.videoUrl = videoUrl || portfolio.videoUrl;
+            portfolio.link = link || portfolio.link;
             portfolio.caseStudy = caseStudy || portfolio.caseStudy;
             portfolio.featured = featured !== undefined ? featured === 'true' : portfolio.featured;
 

@@ -7,6 +7,7 @@ const { protect, admin } = require('../middleware/authMiddleware');
 // @route   POST /api/enquiries
 // @access  Public
 router.post('/', async (req, res) => {
+    console.log('Enquiry POST request received', req.body);
     const { name, email, phone, serviceType, message } = req.body;
 
     try {
@@ -21,6 +22,7 @@ router.post('/', async (req, res) => {
         const createdEnquiry = await enquiry.save();
         res.status(201).json(createdEnquiry);
     } catch (error) {
+        console.error('Error saving enquiry:', error);
         res.status(500).json({ message: error.message });
     }
 });

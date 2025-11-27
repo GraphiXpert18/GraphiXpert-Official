@@ -32,30 +32,9 @@ export default function LoginPage() {
         } catch (err: any) {
             console.error('Login failed:', err);
             // Mock login for demo if backend fails
-            if (email === 'rajaaysha78@gmail.com' && password === 'admin') {
-                const mockUser = {
-                    _id: 'admin123',
-                    username: 'Admin User',
-                    email: 'rajaaysha78@gmail.com',
-                    role: 'admin',
-                    token: 'mock-token',
-                };
-                localStorage.setItem('user', JSON.stringify(mockUser));
-                router.push('/admin');
-                return;
-            }
-            if (email === 'client@example.com' && password === 'client') {
-                const mockUser = {
-                    _id: 'client123',
-                    username: 'Client User',
-                    email: 'client@example.com',
-                    role: 'client',
-                    token: 'mock-token',
-                };
-                localStorage.setItem('user', JSON.stringify(mockUser));
-                router.push('/dashboard');
-                return;
-            }
+            // Mock login removed to ensure real backend authentication
+            console.error('Login failed:', err);
+
 
             setError(err.response?.data?.message || 'Invalid email or password');
         } finally {
@@ -111,7 +90,7 @@ export default function LoginPage() {
                 </form>
 
                 <div className="mt-6 text-center text-sm text-gray-500">
-                    <p>Demo Admin: admin@example.com / admin</p>
+                    <p>Demo Admin: graphixpert18@gmail.com / graphi@18xpert</p>
                     <p>Demo Client: client@example.com / client</p>
                 </div>
             </div>

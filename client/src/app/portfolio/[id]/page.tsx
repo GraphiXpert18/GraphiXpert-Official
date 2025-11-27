@@ -5,26 +5,26 @@ import { useParams, useRouter } from 'next/navigation';
 import api from '@/lib/api';
 import { FaArrowLeft, FaTag, FaPlay } from 'react-icons/fa';
 
-export default function PortfolioDetailPage() {
+export default function ProjectDetailPage() {
     const params = useParams();
     const router = useRouter();
-    const [portfolio, setPortfolio] = useState<any>(null);
+    const [Project, setProject] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
     const [mediaType, setMediaType] = useState<'image' | 'video'>('image');
 
     useEffect(() => {
         if (params.id) {
-            fetchPortfolio();
+            fetchProject();
         }
     }, [params.id]);
 
-    const fetchPortfolio = async () => {
+    const fetchProject = async () => {
         try {
             const response = await api.get(`/portfolio/${params.id}`);
-            setPortfolio(response.data);
+            setProject(response.data);
         } catch (error) {
-            console.error('Error fetching portfolio:', error);
+            console.error('Error fetching Project:', error);
         } finally {
             setLoading(false);
         }
@@ -40,7 +40,7 @@ export default function PortfolioDetailPage() {
         );
     }
 
-    if (!portfolio) {
+    if (!Project) {
         return (
             <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
                 <div className="text-center py-12">
@@ -56,8 +56,8 @@ export default function PortfolioDetailPage() {
         );
     }
 
-    const images = portfolio.images || [];
-    const videos = portfolio.videos || [];
+    const images = Project.images || [];
+    const videos = Project.videos || [];
     const allMedia = [
         ...images.map((img: string) => ({ type: 'image', url: img })),
         ...videos.map((vid: string) => ({ type: 'video', url: vid }))
@@ -73,7 +73,7 @@ export default function PortfolioDetailPage() {
         return match && match[2].length === 11 ? `https://www.youtube.com/embed/${match[2]}` : null;
     };
 
-    const youtubeEmbedUrl = portfolio.videoUrl ? getYouTubeEmbedUrl(portfolio.videoUrl) : null;
+    const youtubeEmbedUrl = Project.videoUrl ? getYouTubeEmbedUrl(Project.videoUrl) : null;
 
     return (
         <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
@@ -101,7 +101,7 @@ export default function PortfolioDetailPage() {
                             ) : (
                                 <img
                                     src={displayUrl}
-                                    alt={portfolio.title}
+                                    alt={Project.title}
                                     className="absolute inset-0 w-full h-full object-contain"
                                 />
                             )}
@@ -127,7 +127,7 @@ export default function PortfolioDetailPage() {
                                     ) : (
                                         <img
                                             src={`http://localhost:5000${media.url}`}
-                                            alt={`${portfolio.title} ${index + 1}`}
+                                            alt={`${Project.title} ${index + 1}`}
                                             className="w-full h-20 object-cover bg-gray-50"
                                         />
                                     )}
@@ -156,30 +156,30 @@ export default function PortfolioDetailPage() {
                 <div>
                     <div className="flex items-center mb-4">
                         <FaTag className="text-blue-600 mr-2" />
-                        <span className="text-blue-600 font-medium">{portfolio.category}</span>
+                        <span className="text-blue-600 font-medium">{Project.category}</span>
                     </div>
 
                     <h1 className="text-4xl font-extrabold text-gray-900 mb-6">
-                        {portfolio.title}
+                        {Project.title}
                     </h1>
 
                     <div className="prose max-w-none">
                         <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
-                            {portfolio.description}
+                            {Project.description}
                         </p>
                     </div>
 
-                    {portfolio.caseStudy && (
+                    {Project.caseStudy && (
                         <div className="mt-8 p-6 bg-blue-50 rounded-lg">
                             <h3 className="text-xl font-bold text-gray-800 mb-3">Case Study</h3>
-                            <p className="text-gray-700 whitespace-pre-line">{portfolio.caseStudy}</p>
+                            <p className="text-gray-700 whitespace-pre-line">{Project.caseStudy}</p>
                         </div>
                     )}
 
-                    {portfolio.link && (
+                    {Project.link && (
                         <div className="mt-8">
                             <a
-                                href={portfolio.link}
+                                href={Project.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-block bg-blue-600 text-white px-8 py-3 rounded-md font-medium hover:bg-blue-700 transition duration-300"

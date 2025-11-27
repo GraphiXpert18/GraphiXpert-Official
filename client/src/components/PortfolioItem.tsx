@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-interface PortfolioProps {
+interface ProjectProps {
     _id: string;
     title: string;
     category: string;
@@ -11,7 +11,7 @@ interface PortfolioProps {
     description: string;
 }
 
-const PortfolioItem = ({ item }: { item: PortfolioProps }) => {
+const ProjectItem = ({ item }: { item: ProjectProps }) => {
     // Helper function to get full image URL (supports both Cloudinary and local paths)
     const getImageUrl = (imagePath: string | undefined) => {
         if (!imagePath) return '/placeholder.jpg';
@@ -59,4 +59,4 @@ const PortfolioItem = ({ item }: { item: PortfolioProps }) => {
     );
 };
 
-export default PortfolioItem;
+export default ProjectItem;

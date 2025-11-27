@@ -2,8 +2,26 @@
 
 import { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaUser } from 'react-icons/fa';
 import api from '@/lib/api';
+
+const contactPersons = [
+    {
+        name: 'Surya',
+        phone: '7358918032',
+        email: 'suriya1252004@gmail.com',
+    },
+    {
+        name: 'Shree Ganesh',
+        phone: '8610927831',
+        email: 'shreeganeshaiengg@gmail.com',
+    },
+    {
+        name: 'Raja Mohamed',
+        phone: '9788156637',
+        email: 'rajaaysha78@gmail.com',
+    },
+];
 
 function ContactForm() {
     const searchParams = useSearchParams();
@@ -34,9 +52,7 @@ function ContactForm() {
             setFormData({ name: '', email: '', phone: '', serviceType: '', message: '' });
         } catch (error) {
             console.error('Error submitting form:', error);
-            // For now, show success even if backend fails (demo mode)
-            setStatus('success');
-            // setStatus('error'); // Uncomment when backend is real
+            setStatus('error');
         }
     };
 
@@ -108,7 +124,7 @@ function ContactForm() {
                     <option value="App Development">App Development</option>
                     <option value="UI/UX Design">UI/UX Design</option>
                     <option value="Graphic Design">Graphic Design</option>
-                    <option value="Video Editing">Video Editing</option>
+                    <option value="Multimedia Service">Multimedia Service</option>
                     <option value="Digital Marketing">Digital Marketing</option>
                     <option value="Other">Other</option>
                 </select>
@@ -153,29 +169,32 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 {/* Contact Info */}
                 <div>
-                    <div className="bg-blue-50 p-8 rounded-lg mb-8">
-                        <h3 className="text-2xl font-bold mb-6 text-blue-900">Get in Touch</h3>
-                        <div className="space-y-6">
-                            <div className="flex items-start">
-                                <FaPhone className="text-blue-600 mt-1 mr-4" size={24} />
-                                <div>
-                                    <h4 className="font-semibold text-gray-900">Phone</h4>
-                                    <p className="text-gray-600">+91 9788156637</p>
+                    <h3 className="text-2xl font-bold mb-6 text-gray-900">Our Team</h3>
+                    <div className="grid grid-cols-1 gap-6 mb-8">
+                        {contactPersons.map((person, index) => (
+                            <div key={index} className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                                <div className="flex items-center mb-4">
+                                    <div className="bg-blue-600 p-3 rounded-full mr-3">
+                                        <FaUser className="text-white" size={20} />
+                                    </div>
+                                    <h4 className="font-bold text-lg text-gray-900">{person.name}</h4>
+                                </div>
+                                <div className="space-y-3">
+                                    <div className="flex items-start">
+                                        <FaPhone className="text-blue-600 mt-1 mr-3 flex-shrink-0" size={16} />
+                                        <a href={`tel:+91${person.phone}`} className="text-gray-700 hover:text-blue-600 transition-colors text-sm">
+                                            +91 {person.phone}
+                                        </a>
+                                    </div>
+                                    <div className="flex items-start">
+                                        <FaEnvelope className="text-blue-600 mt-1 mr-3 flex-shrink-0" size={16} />
+                                        <a href={`mailto:${person.email}`} className="text-gray-700 hover:text-blue-600 transition-colors text-sm break-all">
+                                            {person.email}
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="flex items-start">
-                                <FaEnvelope className="text-blue-600 mt-1 mr-4" size={24} />
-                                <div>
-                                    <h4 className="font-semibold text-gray-900">Email</h4>
-                                    <p className="text-gray-600">rajaaysha78@gmail.com</p>
-                                </div>
-                                <div className="bg-gray-100 h-64 rounded-lg flex items-center justify-center text-gray-500">
-                                    {/* Placeholder for Map */}
-                                    Google Map Embed Placeholder
-                                </div>
-                            </div>
-
-                        </div>
+                        ))}
                     </div>
                 </div>
 

@@ -8,7 +8,6 @@ Full-stack portfolio website with admin dashboard for managing projects.
 - **Backend**: Node.js, Express, MongoDB
 - **Authentication**: JWT
 - **File Upload**: Multer
-- **Deployment**: Render
 
 ## Features
 
@@ -33,14 +32,6 @@ cd client
 npm install
 npm run dev
 ```
-
-## Deployment
-
-See [Deployment Guide](./DEPLOYMENT.md) for detailed instructions on deploying to Render.
-
-## Environment Variables
-
-See [ENV_VARIABLES.md](./ENV_VARIABLES.md) for required environment variables.
 
 ## License
 

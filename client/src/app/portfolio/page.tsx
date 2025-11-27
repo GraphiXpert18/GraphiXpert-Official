@@ -14,7 +14,7 @@ interface PortfolioItemType {
     description: string;
 }
 
-const categories = ['All', 'Web Design', 'App Development', 'UI/UX Design', 'Graphic Design', 'Video Editing'];
+const categories = ['All', 'Web Design', 'App Development', 'UI/UX Design', 'Graphic Design', 'Multimedia Service'];
 
 export default function PortfolioPage() {
     const [filter, setFilter] = useState('All');

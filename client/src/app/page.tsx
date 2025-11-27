@@ -1,29 +1,24 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FaLaptopCode, FaMobileAlt, FaPaintBrush, FaVideo } from 'react-icons/fa';
+import { FaLaptopCode, FaMobileAlt, FaPaintBrush, FaVideo, FaServicestack } from 'react-icons/fa';
+import api from '@/lib/api';
 
 export default function Home() {
-  const services = [
-    {
-      title: 'Web Design',
-      description: 'Stunning, responsive websites tailored to your brand.',
-      icon: <FaLaptopCode size={40} className="text-blue-600" />,
-    },
-    {
-      title: 'App Development',
-      description: 'Native and cross-platform mobile applications.',
-      icon: <FaMobileAlt size={40} className="text-green-600" />,
-    },
-    {
-      title: 'UI/UX Design',
-      description: 'User-centric designs that drive engagement.',
-      icon: <FaPaintBrush size={40} className="text-purple-600" />,
-    },
-    {
-      title: 'Video Editing',
-      description: 'Professional video editing for all your needs.',
-      icon: <FaVideo size={40} className="text-red-600" />,
-    },
-  ];
+  const [services, setServices] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const { data } = await api.get('/services');
+        setServices(data.slice(0, 4));
+      } catch (error) {
+        console.error('Failed to fetch services:', error);
+      }
+    };
+    fetchServices();
+  }, []);
 
   return (
     <div className="flex flex-col items-center">
@@ -47,22 +42,38 @@ export default function Home() {
       <section className="w-full max-w-7xl mx-auto py-16 px-4">
         <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 flex flex-col items-center text-center"
-            >
-              <div className="mb-4">{service.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-              <p className="text-gray-600 mb-4">{service.description}</p>
-              <Link
-                href="/services"
-                className="text-blue-600 font-medium hover:underline"
+          {services.length > 0 ? (
+            services.map((service, index) => (
+              <div
+                key={service._id || index}
+                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 flex flex-col items-center text-center"
               >
-                Learn More
-              </Link>
+                <div className="mb-4">
+                  {service.image ? (
+                    <img
+                      src={`http://localhost:5000${service.image}`}
+                      alt={service.title}
+                      className="w-16 h-16 object-cover rounded-full"
+                    />
+                  ) : (
+                    <FaServicestack size={40} className="text-blue-600" />
+                  )}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                <p className="text-gray-600 mb-4 line-clamp-3">{service.description}</p>
+                <Link
+                  href={`/services/${service._id}`}
+                  className="text-blue-600 font-medium hover:underline"
+                >
+                  Learn More
+                </Link>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-4 text-center text-gray-500">
+              Loading services...
             </div>
-          ))}
+          )}
         </div>
         <div className="text-center mt-12">
           <Link

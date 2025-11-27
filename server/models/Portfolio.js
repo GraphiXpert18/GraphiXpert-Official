@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const portfolioSchema = new mongoose.Schema({
+const ProjectSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -14,6 +14,7 @@ const portfolioSchema = new mongoose.Schema({
     images: [String], // Array of image URLs
     videos: [String], // Array of video URLs
     videoUrl: String, // External video URL (YouTube, Vimeo, etc.)
+    link: String, // Live project link
     caseStudy: String,
     featured: {
         type: Boolean,
@@ -21,4 +22,4 @@ const portfolioSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Portfolio', portfolioSchema);
+module.exports = mongoose.model('Project', ProjectSchema);

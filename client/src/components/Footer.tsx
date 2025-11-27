@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { SiFiverr } from 'react-icons/si';
 
 const Footer = () => {
     return (
@@ -33,9 +34,10 @@ const Footer = () => {
                     <div>
                         <h4 className="text-lg font-semibold mb-4">Connect</h4>
                         <div className="flex space-x-4">
-                            <a href="#" className="text-gray-400 hover:text-white"><FaFacebook size={24} /></a>
-                            <a href="#" className="text-gray-400 hover:text-white"><FaTwitter size={24} /></a>
-                            <a href="https://www.instagram.com/p/DMuLjBSh-cu/?igsh=MWVqcndkMDg4cnpoeg==" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white"><FaInstagram size={24} /></a>
+                            <a href="https://fiverr.com/s/vvgB0wL" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white"><SiFiverr size={24} /></a>
+                            <a href="mailto:graphixpert18@gmail.com" className="text-gray-400 hover:text-white"><FaEnvelope size={24} /></a>
+                            <a href="https://www.instagram.com/graphixpert18?igsh=OGdwcDNmNmE2MW9u" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white"><FaInstagram size={24} /></a>
+                            <a href="https://www.facebook.com/share/17Y637Ud42/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white"><FaFacebook size={24} /></a>
                             <a href="#" className="text-gray-400 hover:text-white"><FaLinkedin size={24} /></a>
                         </div>
                     </div>
