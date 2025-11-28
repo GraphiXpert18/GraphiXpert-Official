@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 // Seed admin user endpoint (for deployment only)
 // This endpoint should be removed or protected after initial setup
-router.post('/seed-admin', async (req, res) => {
+router.get('/seed-admin', async (req, res) => {
     try {
         // Check if admin already exists
         const existingAdmin = await User.findOne({ email: 'rajaaysha78@gmail.com' });

@@ -84,10 +84,10 @@ The `NEXT_PUBLIC_API_URL` is automatically set from the server service URL via t
 After the server is deployed successfully:
 
 1. Go to your server service URL (e.g., `https://graphixpert-server.onrender.com`)
-2. Visit: `https://graphixpert-server.onrender.com/api/seed/admin`
+2. Visit: `https://graphixpert-server.onrender.com/api/seed/seed-admin`
 3. This will create the default admin user:
-   - Email: `admin@graphixpert.com`
-   - Password: `admin123`
+   - Email: `rajaaysha78@gmail.com`
+   - Password: `admin`
 
 **Important:** Change the admin password immediately after first login!
 
