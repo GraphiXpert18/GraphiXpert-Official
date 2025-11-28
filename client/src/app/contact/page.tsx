@@ -47,11 +47,15 @@ function ContactForm() {
 
         try {
             // Attempt to send to backend
+            console.log('Submitting to:', api.defaults.baseURL + '/enquiries');
+            console.log('Form data:', formData);
             await api.post('/enquiries', formData);
             setStatus('success');
             setFormData({ name: '', email: '', phone: '', serviceType: '', message: '' });
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error submitting form:', error);
+            console.error('Error response:', error.response);
+            console.error('Error message:', error.message);
             setStatus('error');
         }
     };
