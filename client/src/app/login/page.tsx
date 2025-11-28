@@ -63,7 +63,7 @@ export default function LoginPage() {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                             className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="admin@example.com"
+                            placeholder="Only for admin"
                         />
                     </div>
 
@@ -90,8 +90,8 @@ export default function LoginPage() {
                 </form>
 
                 <div className="mt-6 text-center text-sm text-gray-500">
-                    <p>Demo Admin: graphixpert18@gmail.com / graphi@18xpert</p>
-                    <p>Demo Client: client@example.com / client</p>
+                    <p>Admin login page</p>
+                    <p>GRAPHI XPERT</p>
                 </div>
             </div>
         </div>

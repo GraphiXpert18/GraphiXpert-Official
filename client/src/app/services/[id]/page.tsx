@@ -24,7 +24,9 @@ export default function ServiceDetailsPage() {
             const { data } = await api.get(`/services/${id}`);
             setService({
                 ...data,
-                image: data.image ? `${API_URL}${data.image}` : undefined
+                image: data.image
+                    ? (data.image.startsWith('http') ? data.image : `${API_URL}${data.image}`)
+                    : undefined
             });
         } catch (error) {
             console.error('Error fetching service:', error);

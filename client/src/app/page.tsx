@@ -53,7 +53,7 @@ export default function Home() {
                 <div className="mb-4">
                   {service.image ? (
                     <img
-                      src={`${API_URL}${service.image}`}
+                      src={service.image.startsWith('http') ? service.image : `${API_URL}${service.image}`}
                       alt={service.title}
                       className="w-16 h-16 object-cover rounded-full"
                     />

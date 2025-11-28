@@ -66,7 +66,9 @@ export default function ProjectDetailPage() {
     ];
 
     const currentMedia = allMedia[currentMediaIndex];
-    const displayUrl = currentMedia ? `${API_URL}${currentMedia.url}` : '/placeholder.jpg';
+    const displayUrl = currentMedia
+        ? (currentMedia.url.startsWith('http') ? currentMedia.url : `${API_URL}${currentMedia.url}`)
+        : '/placeholder.jpg';
 
     // Extract YouTube video ID if videoUrl is provided
     const getYouTubeEmbedUrl = (url: string) => {
@@ -128,7 +130,7 @@ export default function ProjectDetailPage() {
                                         </div>
                                     ) : (
                                         <img
-                                            src={`${API_URL}${media.url}`}
+                                            src={media.url.startsWith('http') ? media.url : `${API_URL}${media.url}`}
                                             alt={`${Project.title} ${index + 1}`}
                                             className="w-full h-20 object-cover bg-gray-50"
                                         />
