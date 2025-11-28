@@ -5,6 +5,8 @@ import { FaPlus, FaEdit, FaTrash, FaImage, FaVideo } from 'react-icons/fa';
 import PortfolioUploadModal from '@/components/PortfolioUploadModal';
 import api from '@/lib/api';
 
+import { API_URL } from '@/lib/config';
+
 export default function AdminPortfolioPage() {
     const [portfolio, setPortfolio] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
@@ -83,9 +85,9 @@ export default function AdminPortfolioPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {portfolio.map((item) => {
                         const thumbnailUrl = item.thumbnail
-                            ? `http://localhost:5000${item.thumbnail}`
+                            ? `${API_URL}${item.thumbnail}`
                             : item.images?.[0]
-                                ? `http://localhost:5000${item.images[0]}`
+                                ? `${API_URL}${item.images[0]}`
                                 : '/placeholder.jpg';
 
                         return (

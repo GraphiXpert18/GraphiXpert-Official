@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { API_URL } from '@/lib/config';
+
 interface ProjectProps {
     _id: string;
     title: string;
@@ -20,7 +22,7 @@ const ProjectItem = ({ item }: { item: ProjectProps }) => {
             return imagePath;
         }
         // Otherwise, it's a local path, prepend the server URL
-        return `http://localhost:5000${imagePath}`;
+        return `${API_URL}${imagePath}`;
     };
 
     // Use thumbnail if available, otherwise fall back to first image

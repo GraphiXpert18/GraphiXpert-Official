@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { FaLaptopCode, FaMobileAlt, FaPaintBrush, FaVideo, FaServicestack } from 'react-icons/fa';
 import api from '@/lib/api';
 
+import { API_URL } from '@/lib/config';
+
 export default function Home() {
   const [services, setServices] = useState<any[]>([]);
 
@@ -51,7 +53,7 @@ export default function Home() {
                 <div className="mb-4">
                   {service.image ? (
                     <img
-                      src={`http://localhost:5000${service.image}`}
+                      src={`${API_URL}${service.image}`}
                       alt={service.title}
                       className="w-16 h-16 object-cover rounded-full"
                     />

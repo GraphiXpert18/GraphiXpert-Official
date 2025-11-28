@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { FaPlus, FaEdit, FaTrash, FaImage } from 'react-icons/fa';
 import api from '@/lib/api';
 
+import { API_URL } from '@/lib/config';
+
 interface Service {
     _id: string;
     title: string;
@@ -177,7 +179,7 @@ export default function AdminServicesPage() {
                                         <div className="flex items-center">
                                             {service.image && (
                                                 <img
-                                                    src={`http://localhost:5000${service.image}`}
+                                                    src={`${API_URL}${service.image}`}
                                                     alt={service.title}
                                                     className="w-12 h-12 rounded object-cover mr-3"
                                                 />

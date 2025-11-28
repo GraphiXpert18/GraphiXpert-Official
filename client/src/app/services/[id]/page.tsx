@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { FaArrowLeft, FaCheck, FaClock, FaTag } from 'react-icons/fa';
 import api from '@/lib/api';
 
+import { API_URL } from '@/lib/config';
+
 export default function ServiceDetailsPage() {
     const params = useParams();
     const [service, setService] = useState<any>(null);
@@ -22,7 +24,7 @@ export default function ServiceDetailsPage() {
             const { data } = await api.get(`/services/${id}`);
             setService({
                 ...data,
-                image: data.image ? `http://localhost:5000${data.image}` : undefined
+                image: data.image ? `${API_URL}${data.image}` : undefined
             });
         } catch (error) {
             console.error('Error fetching service:', error);

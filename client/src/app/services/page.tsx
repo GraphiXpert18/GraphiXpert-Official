@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import ServiceCard from '@/components/ServiceCard';
 import api from '@/lib/api';
 
+import { API_URL } from '@/lib/config';
+
 // Mock data in case backend is down
 const mockServices = [
     {
@@ -63,7 +65,7 @@ export default function ServicesPage() {
                 // Process image URLs
                 const processedServices = data.map((service: any) => ({
                     ...service,
-                    image: service.image ? `http://localhost:5000${service.image}` : undefined
+                    image: service.image ? `${API_URL}${service.image}` : undefined
                 }));
 
                 if (processedServices.length > 0) {
