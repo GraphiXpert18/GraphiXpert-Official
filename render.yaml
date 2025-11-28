@@ -17,7 +17,7 @@ services:
       - key: CLOUDINARY_API_SECRET
         sync: false
       - key: CLIENT_URL
-        sync: false
+        value: https://graphixpert-client.onrender.com
 
   - type: web
     name: graphixpert-client
@@ -27,7 +27,4 @@ services:
     startCommand: cd client && npm start
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        fromService:
-          type: web
-          name: graphixpert-server
-          property: host
+        value: https://graphixpert-server.onrender.com
