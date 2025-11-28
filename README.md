@@ -96,7 +96,7 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions to Ren
 - `CLOUDINARY_API_KEY` - Cloudinary API key
 - `CLOUDINARY_API_SECRET` - Cloudinary API secret
 - `CLIENT_URL` - Frontend URL (for CORS)
-- `PORT` - Server port (default: 5000)
+- `PORT` - Server port (default: 5007)
 
 ### Client
 - `NEXT_PUBLIC_API_URL` - Backend API URL

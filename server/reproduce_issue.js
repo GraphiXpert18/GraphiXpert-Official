@@ -1,6 +1,6 @@
 async function reproduceIssue() {
-    const loginUrl = 'http://localhost:5000/api/auth/login';
-    const enquiriesUrl = 'http://localhost:5000/api/enquiries';
+    const loginUrl = 'http://localhost:5007/api/auth/login';
+    const enquiriesUrl = 'http://localhost:5007/api/enquiries';
 
     const credentials = {
         email: 'graphixpert18@gmail.com',

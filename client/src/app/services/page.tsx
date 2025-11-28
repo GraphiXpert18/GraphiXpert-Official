@@ -12,14 +12,14 @@ const mockServices = [
         _id: '1',
         title: 'Web Design',
         description: 'Custom, responsive websites designed to engage your audience and grow your business.',
-        priceRange: '$500 - $5000',
+        priceRange: '$500 - $5007',
         image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=800&q=80',
     },
     {
         _id: '2',
         title: 'Mobile App Development',
         description: 'Native and cross-platform mobile applications for iOS and Android.',
-        priceRange: '$2000 - $15000',
+        priceRange: '$2000 - $15007',
         image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80',
     },
     {
@@ -33,7 +33,7 @@ const mockServices = [
         _id: '4',
         title: 'Digital Marketing',
         description: 'Strategic marketing campaigns to boost your online visibility and reach.',
-        priceRange: '$500/mo - $5000/mo',
+        priceRange: '$500/mo - $5007/mo',
         image: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=800&q=80',
     },
     {

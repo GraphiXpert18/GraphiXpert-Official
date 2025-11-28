@@ -35,26 +35,48 @@ const ProjectItem = ({ item }: { item: ProjectProps }) => {
                 : '/placeholder.jpg';
 
     return (
-        <Link href={`/portfolio/${item._id}`}>
-            <div className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer hover:shadow-2xl transition-shadow duration-300 bg-gray-100">
-                {/* 16:9 Aspect Ratio Container */}
-                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+        <Link href={`/portfolio/${item._id}`} className="block h-full">
+            <div className="group relative h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+                {/* Image Container */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden">
                     <Image
                         src={displayImage}
                         alt={item.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover transform group-hover:scale-105 transition duration-500"
+                        className="object-cover transform group-hover:scale-110 transition duration-700 ease-in-out"
                         unoptimized
                     />
+
+                    {/* Overlay Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    {/* Category Badge */}
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-gray-900 shadow-sm">
+                        {item.category}
+                    </div>
                 </div>
 
-                {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-center p-4">
-                    <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-blue-300 font-medium mb-2">{item.category}</p>
-                    <p className="text-gray-300 text-sm line-clamp-2">{item.description}</p>
-                    <p className="text-white mt-4 text-sm font-medium">Click to view details →</p>
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-grow">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-1">
+                        {item.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm line-clamp-2 mb-4 flex-grow">
+                        {item.description}
+                    </p>
+
+                    <div className="flex items-center text-blue-600 font-medium text-sm group/link">
+                        View Project
+                        <svg
+                            className="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
                 </div>
             </div>
         </Link>

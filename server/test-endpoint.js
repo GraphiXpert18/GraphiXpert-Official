@@ -1,7 +1,7 @@
 async function testEndpoint() {
     try {
-        console.log('Testing http://localhost:5000/api/enquiries...');
-        const response = await fetch('http://localhost:5000/api/enquiries', {
+        console.log('Testing http://localhost:5007/api/enquiries...');
+        const response = await fetch('http://localhost:5007/api/enquiries', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
