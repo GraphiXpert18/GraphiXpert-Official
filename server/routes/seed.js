@@ -18,12 +18,10 @@ router.get('/seed-admin', async (req, res) => {
         }
 
         // Create admin user
-        const hashedPassword = await bcrypt.hash('admin', 10);
-
         const adminUser = new User({
-            name: 'Admin',
+            username: 'admin',
             email: 'rajaaysha78@gmail.com',
-            password: hashedPassword,
+            password: 'admin',
             role: 'admin'
         });
 
