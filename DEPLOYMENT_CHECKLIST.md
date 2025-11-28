@@ -31,6 +31,7 @@ Use this checklist to ensure a smooth deployment to Render.
 
 ### 5. Deploy via Blueprint
 - [ ] Click "New" → "Blueprint" in Render Dashboard
+
 - [ ] Select your GraphiXpert repository
 - [ ] Render will detect `render.yaml` automatically
 - [ ] Click "Apply" to create services
