@@ -179,7 +179,7 @@ export default function AdminServicesPage() {
                                         <div className="flex items-center">
                                             {service.image && (
                                                 <img
-                                                    src={`${API_URL}${service.image}`}
+                                                    src={service.image.startsWith('http') ? service.image : `${API_URL}${service.image}`}
                                                     alt={service.title}
                                                     className="w-12 h-12 rounded object-cover mr-3"
                                                 />

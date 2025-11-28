@@ -85,9 +85,9 @@ export default function AdminPortfolioPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {portfolio.map((item) => {
                         const thumbnailUrl = item.thumbnail
-                            ? `${API_URL}${item.thumbnail}`
+                            ? (item.thumbnail.startsWith('http') ? item.thumbnail : `${API_URL}${item.thumbnail}`)
                             : item.images?.[0]
-                                ? `${API_URL}${item.images[0]}`
+                                ? (item.images[0].startsWith('http') ? item.images[0] : `${API_URL}${item.images[0]}`)
                                 : '/placeholder.jpg';
 
                         return (
