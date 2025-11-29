@@ -31,7 +31,12 @@ if (useCloudinary) {
     // Use local storage for development
     storage = multer.diskStorage({
         destination(req, file, cb) {
-            cb(null, 'uploads/');
+            const fs = require('fs');
+            const dir = 'uploads/';
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir);
+            }
+            cb(null, dir);
         },
         filename(req, file, cb) {
             cb(
