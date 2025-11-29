@@ -43,9 +43,19 @@ router.post('/', protect, admin, upload.fields([
 ]), async (req, res) => {
     const { title, category, description, videoUrl, link, caseStudy, featured } = req.body;
 
-    const thumbnail = req.files?.thumbnail ? `/uploads/${req.files.thumbnail[0].filename}` : null;
-    const images = req.files?.images ? req.files.images.map(file => `/uploads/${file.filename}`) : [];
-    const videos = req.files?.videos ? req.files.videos.map(file => `/uploads/${file.filename}`) : [];
+    // Helper function to get file path (Cloudinary returns full URL in file.path, local storage needs /uploads/ prefix)
+    const getFilePath = (file) => {
+        // If file.path exists and starts with http, it's a Cloudinary URL
+        if (file.path && (file.path.startsWith('http://') || file.path.startsWith('https://'))) {
+            return file.path;
+        }
+        // Otherwise, it's local storage - use /uploads/ prefix
+        return `/uploads/${file.filename}`;
+    };
+
+    const thumbnail = req.files?.thumbnail ? getFilePath(req.files.thumbnail[0]) : null;
+    const images = req.files?.images ? req.files.images.map(file => getFilePath(file)) : [];
+    const videos = req.files?.videos ? req.files.videos.map(file => getFilePath(file)) : [];
 
     try {
         const portfolio = new Portfolio({
@@ -78,6 +88,16 @@ router.put('/:id', protect, admin, upload.fields([
 ]), async (req, res) => {
     const { title, category, description, videoUrl, link, caseStudy, featured } = req.body;
 
+    // Helper function to get file path (Cloudinary returns full URL in file.path, local storage needs /uploads/ prefix)
+    const getFilePath = (file) => {
+        // If file.path exists and starts with http, it's a Cloudinary URL
+        if (file.path && (file.path.startsWith('http://') || file.path.startsWith('https://'))) {
+            return file.path;
+        }
+        // Otherwise, it's local storage - use /uploads/ prefix
+        return `/uploads/${file.filename}`;
+    };
+
     try {
         const portfolio = await Portfolio.findById(req.params.id);
 
@@ -92,18 +112,18 @@ router.put('/:id', protect, admin, upload.fields([
 
             // Update thumbnail if provided
             if (req.files?.thumbnail) {
-                portfolio.thumbnail = `/uploads/${req.files.thumbnail[0].filename}`;
+                portfolio.thumbnail = getFilePath(req.files.thumbnail[0]);
             }
 
             // Add new images if provided
             if (req.files?.images) {
-                const newImages = req.files.images.map(file => `/uploads/${file.filename}`);
+                const newImages = req.files.images.map(file => getFilePath(file));
                 portfolio.images = [...portfolio.images, ...newImages];
             }
 
             // Add new videos if provided
             if (req.files?.videos) {
-                const newVideos = req.files.videos.map(file => `/uploads/${file.filename}`);
+                const newVideos = req.files.videos.map(file => getFilePath(file));
                 portfolio.videos = [...(portfolio.videos || []), ...newVideos];
             }
 
