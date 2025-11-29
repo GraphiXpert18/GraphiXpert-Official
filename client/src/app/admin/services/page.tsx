@@ -5,6 +5,7 @@ import { FaPlus, FaEdit, FaTrash, FaImage } from 'react-icons/fa';
 import api from '@/lib/api';
 
 import { API_URL } from '@/lib/config';
+import { getImageUrl } from '@/lib/utils';
 
 interface Service {
     _id: string;
@@ -179,7 +180,7 @@ export default function AdminServicesPage() {
                                         <div className="flex items-center">
                                             {service.image && (
                                                 <img
-                                                    src={service.image.startsWith('http') ? service.image : `${API_URL}${service.image}`}
+                                                    src={getImageUrl(service.image)}
                                                     alt={service.title}
                                                     className="w-12 h-12 rounded object-cover mr-3"
                                                 />

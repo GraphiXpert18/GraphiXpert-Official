@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaTimes, FaUpload, FaImage, FaVideo, FaFileImage } from 'react-icons/fa';
 import api from '@/lib/api';
+import { getImageUrl } from '@/lib/utils';
 
 interface ProjectUploadModalProps {
     isOpen: boolean;
@@ -13,12 +14,12 @@ interface ProjectUploadModalProps {
 
 export default function ProjectUploadModal({ isOpen, onClose, onSuccess, editItem }: ProjectUploadModalProps) {
     const [formData, setFormData] = useState({
-        title: editItem?.title || '',
-        category: editItem?.category || 'Web Design',
-        description: editItem?.description || '',
-        videoUrl: editItem?.videoUrl || '',
-        link: editItem?.link || '',
-        featured: editItem?.featured || false,
+        title: '',
+        category: 'Web Design',
+        description: '',
+        videoUrl: '',
+        link: '',
+        featured: false,
     });
 
     const [thumbnail, setThumbnail] = useState<File | null>(null);
@@ -29,6 +30,50 @@ export default function ProjectUploadModal({ isOpen, onClose, onSuccess, editIte
     const [videoPreviews, setVideoPreviews] = useState<string[]>([]);
     const [uploading, setUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
+
+    useEffect(() => {
+        if (editItem) {
+            setFormData({
+                title: editItem.title || '',
+                category: editItem.category || 'Web Design',
+                description: editItem.description || '',
+                videoUrl: editItem.videoUrl || '',
+                link: editItem.link || '',
+                featured: editItem.featured || false,
+            });
+
+            if (editItem.thumbnail) {
+                setThumbnailPreview(getImageUrl(editItem.thumbnail));
+            } else {
+                setThumbnailPreview(null);
+            }
+
+            if (editItem.images && editItem.images.length > 0) {
+                setImagePreviews(editItem.images.map((img: string) => getImageUrl(img)));
+            } else {
+                setImagePreviews([]);
+            }
+
+            if (editItem.videos && editItem.videos.length > 0) {
+                setVideoPreviews(editItem.videos.map((vid: string) => getImageUrl(vid)));
+            } else {
+                setVideoPreviews([]);
+            }
+        } else {
+            // Reset form if no editItem (adding new)
+            setFormData({
+                title: '',
+                category: 'Web Design',
+                description: '',
+                videoUrl: '',
+                link: '',
+                featured: false,
+            });
+            setThumbnailPreview(null);
+            setImagePreviews([]);
+            setVideoPreviews([]);
+        }
+    }, [editItem, isOpen]);
 
     const categories = ['Web Design', 'App Development', 'UI/UX Design', 'Graphic Design', 'Multimedia Service', 'Digital Marketing'];
 

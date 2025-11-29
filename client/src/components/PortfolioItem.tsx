@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { API_URL } from '@/lib/config';
+import { getImageUrl } from '@/lib/utils';
 
 interface ProjectProps {
     _id: string;
@@ -14,17 +15,6 @@ interface ProjectProps {
 }
 
 const ProjectItem = ({ item }: { item: ProjectProps }) => {
-    // Helper function to get full image URL (supports both Cloudinary and local paths)
-    const getImageUrl = (imagePath: string | undefined) => {
-        if (!imagePath) return '/placeholder.jpg';
-        // If it's already a full URL (Cloudinary), return as-is
-        if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
-            return imagePath;
-        }
-        // Otherwise, it's a local path, prepend the server URL
-        return `${API_URL}${imagePath}`;
-    };
-
     // Use thumbnail if available, otherwise fall back to first image
     const displayImage = item.thumbnail
         ? getImageUrl(item.thumbnail)

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import ServiceCard from '@/components/ServiceCard';
 import api from '@/lib/api';
 
-import { API_URL } from '@/lib/config';
+
 
 // Mock data in case backend is down
 const mockServices = [
@@ -63,14 +63,11 @@ export default function ServicesPage() {
                 const { data } = await api.get('/services');
 
                 // Process image URLs
-                const processedServices = data.map((service: any) => ({
-                    ...service,
-                    image: service.image ? `${API_URL}${service.image}` : undefined
-                }));
-
-                if (processedServices.length > 0) {
-                    setServices(processedServices);
+                if (data.length > 0) {
+                    setServices(data);
                 }
+
+
             } catch (error) {
                 console.error('Failed to fetch services:', error);
                 // Fallback to mock data is already set

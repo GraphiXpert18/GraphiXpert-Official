@@ -7,6 +7,7 @@ import { FaArrowLeft, FaCheck, FaClock, FaTag } from 'react-icons/fa';
 import api from '@/lib/api';
 
 import { API_URL } from '@/lib/config';
+import { getImageUrl } from '@/lib/utils';
 
 export default function ServiceDetailsPage() {
     const params = useParams();
@@ -25,7 +26,7 @@ export default function ServiceDetailsPage() {
             setService({
                 ...data,
                 image: data.image
-                    ? (data.image.startsWith('http') ? data.image : `${API_URL}${data.image}`)
+                    ? getImageUrl(data.image)
                     : undefined
             });
         } catch (error) {

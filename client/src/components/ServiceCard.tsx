@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import { API_URL } from '@/lib/config';
+import { getImageUrl } from '@/lib/utils';
 
 interface ServiceProps {
     _id: string;
@@ -15,7 +16,7 @@ const ServiceCard = ({ service }: { service: ServiceProps }) => {
         <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300 flex flex-col h-full">
             {service.image && (
                 <img
-                    src={service.image.startsWith('http') ? service.image : `${API_URL}${service.image}`}
+                    src={getImageUrl(service.image)}
                     alt={service.title}
                     className="w-full h-48 object-cover"
                 />

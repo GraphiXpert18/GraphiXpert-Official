@@ -6,6 +6,7 @@ import api from '@/lib/api';
 import { FaArrowLeft, FaTag, FaPlay } from 'react-icons/fa';
 
 import { API_URL } from '@/lib/config';
+import { getImageUrl } from '@/lib/utils';
 
 export default function ProjectDetailPage() {
     const params = useParams();
@@ -67,7 +68,7 @@ export default function ProjectDetailPage() {
 
     const currentMedia = allMedia[currentMediaIndex];
     const displayUrl = currentMedia
-        ? (currentMedia.url.startsWith('http') ? currentMedia.url : `${API_URL}${currentMedia.url}`)
+        ? getImageUrl(currentMedia.url)
         : '/placeholder.jpg';
 
     // Extract YouTube video ID if videoUrl is provided
@@ -130,7 +131,7 @@ export default function ProjectDetailPage() {
                                         </div>
                                     ) : (
                                         <img
-                                            src={media.url.startsWith('http') ? media.url : `${API_URL}${media.url}`}
+                                            src={getImageUrl(media.url)}
                                             alt={`${Project.title} ${index + 1}`}
                                             className="w-full h-20 object-cover bg-gray-50"
                                         />

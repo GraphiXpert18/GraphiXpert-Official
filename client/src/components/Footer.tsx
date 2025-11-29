@@ -38,7 +38,7 @@ const Footer = () => {
                             <a href="mailto:graphixpert18@gmail.com" className="text-gray-400 hover:text-white"><FaEnvelope size={24} /></a>
                             <a href="https://www.instagram.com/graphixpert18?igsh=OGdwcDNmNmE2MW9u" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white"><FaInstagram size={24} /></a>
                             <a href="https://www.facebook.com/share/17Y637Ud42/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white"><FaFacebook size={24} /></a>
-                            <a href="#" className="text-gray-400 hover:text-white"><FaLinkedin size={24} /></a>
+                            <a href="http://www.linkedin.com/in/graphixpert-xpert-b79049398" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white"><FaLinkedin size={24} /></a>
                         </div>
                     </div>
                 </div>
