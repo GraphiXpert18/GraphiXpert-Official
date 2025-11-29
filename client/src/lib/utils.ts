@@ -10,7 +10,9 @@ export const getImageUrl = (imagePath: string | undefined | null) => {
 
     // Ensure proper slash handling
     const baseUrl = API_URL.endsWith('/') ? API_URL.slice(0, -1) : API_URL;
-    const path = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+    // Normalize slashes (replace backslashes with forward slashes)
+    const normalizedPath = imagePath.replace(/\\/g, '/');
+    const path = normalizedPath.startsWith('/') ? normalizedPath : `/${normalizedPath}`;
 
     return `${baseUrl}${path}`;
 };

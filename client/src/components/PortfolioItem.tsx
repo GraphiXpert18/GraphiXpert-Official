@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+
 
 import { API_URL } from '@/lib/config';
 import { getImageUrl } from '@/lib/utils';
@@ -29,13 +29,10 @@ const ProjectItem = ({ item }: { item: ProjectProps }) => {
             <div className="group relative h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
                 {/* Image Container */}
                 <div className="relative w-full aspect-[4/3] overflow-hidden">
-                    <Image
+                    <img
                         src={displayImage}
                         alt={item.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover transform group-hover:scale-110 transition duration-700 ease-in-out"
-                        unoptimized
+                        className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition duration-700 ease-in-out"
                     />
 
                     {/* Overlay Gradient */}
