@@ -5,24 +5,18 @@ import { useSearchParams } from 'next/navigation';
 import { FaPhone, FaEnvelope, FaUser, FaPaperPlane, FaMapMarkerAlt, FaGlobe } from 'react-icons/fa';
 import api from '@/lib/api';
 
-const contactPersons = [
+interface ContactPerson {
+    name: string;
+    email: string;
+    role: string;
+    phone?: string;
+}
+
+const contactPersons: ContactPerson[] = [
     {
-        name: 'Surya',
-        phone: '7358918032',
-        email: 'suriya1252004@gmail.com',
+        name: 'GraphiXpert',
+        email: 'graphixpert18@gmail.com',
         role: 'Technical Lead'
-    },
-    {
-        name: 'Shree Ganesh',
-        phone: '8610927831',
-        email: 'shreeganeshaiengg@gmail.com',
-        role: 'Creative Director'
-    },
-    {
-        name: 'Raja Mohamed',
-        phone: '9788156637',
-        email: 'rajaaysha78@gmail.com',
-        role: 'Marketing Head'
     },
 ];
 
@@ -219,10 +213,12 @@ export default function ContactPage() {
                                     </div>
                                 </div>
                                 <div className="space-y-3 pl-16">
-                                    <a href={`tel:+91${person.phone}`} className="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
-                                        <FaPhone className="mr-3 text-gray-400" size={14} />
-                                        <span className="text-sm font-medium">+91 {person.phone}</span>
-                                    </a>
+                                    {person.phone && (
+                                        <a href={`tel:+91${person.phone}`} className="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                                            <FaPhone className="mr-3 text-gray-400" size={14} />
+                                            <span className="text-sm font-medium">+91 {person.phone}</span>
+                                        </a>
+                                    )}
                                     <a href={`mailto:${person.email}`} className="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
                                         <FaEnvelope className="mr-3 text-gray-400" size={14} />
                                         <span className="text-sm font-medium break-all">{person.email}</span>
