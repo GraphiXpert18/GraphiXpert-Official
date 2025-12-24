@@ -44,15 +44,20 @@ npm i -g vercel
 vercel
 ```
 
-## Step 3: Configure Project Settings
+## Step 3: Configure Project Settings (CRITICAL)
 
-The `vercel.json` file is already configured with:
-- **Build Command**: `cd client && npm run build`
-- **Install Command**: `npm install --prefix client`
-- **Output Directory**: `client/.next`
-- **Dev Command**: `cd client && npm run dev`
+**This step is required to fix the "404: NOT_FOUND" error.**
 
-You don't need to change these settings in the Vercel dashboard.
+Since your Next.js app is in the `client` folder, you must tell Vercel where to look.
+
+1. Go to your Project in Vercel Dashboard
+2. Click **Settings** tab
+3. Go to **General** section
+4. Find **Root Directory** setting
+5. Click **Edit** and change it to: `client`
+6. Click **Save**
+
+**Note:** You do NOT need a `vercel.json` file in the root directory. We have removed it to avoid conflicts.
 
 ## Step 4: Set Environment Variables
 
@@ -100,6 +105,13 @@ Visit your Vercel URL and test:
 ## Troubleshooting
 
 ### Build Fails
+
+**Error: "ENOENT: no such file or directory... client/client/package.json"**
+- This happens if you set **Root Directory** to `client` BUT still have `npm install --prefix client` in your settings.
+- **Fix:** Go to Vercel Dashboard → Settings → General.
+- Ensure **Root Directory** is `client`.
+- **Reset** "Build Command" and "Install Command" to their default values (toggle the switch off/on or clear the text).
+- Vercel will automatically use `npm install` and `next build` which is correct when inside the client folder.
 
 **Error: "Module not found"**
 - Check that all dependencies are in `client/package.json`
