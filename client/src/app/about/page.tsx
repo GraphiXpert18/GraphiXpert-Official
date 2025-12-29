@@ -9,7 +9,7 @@ export default function AboutPage() {
             <section className="bg-blue-900 text-white py-20 px-4 text-center">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">About GraphiXpert</h1>
                 <p className="text-xl max-w-2xl mx-auto">
-                    We are a creative agency dedicated to transforming your ideas into digital reality.
+                    We are  creative agency dedicated to transforming your ideas into digital reality.
                 </p>
             </section>
 
